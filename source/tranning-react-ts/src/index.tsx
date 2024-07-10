@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Demo from './Demo';
 import './assets/css/custom.css'
+import Part2 from './Part2';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +13,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Demo />
+    {/* <Demo /> */}
+    <Part2 />
   </React.StrictMode>
 );
 

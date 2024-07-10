@@ -1,5 +1,5 @@
-import { error } from 'console';
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Child from './Child';
 import Child2 from './Child2';
 
@@ -33,6 +33,7 @@ export default function Demo() {
     // console.log('Current formatName:', formatName);
     // console.log('Are they the same?', formatNameRef.current === formatName);
     // formatNameRef.current = formatName;
+    objName.age = 21;
   }, [count])
 
   const btnClickCounter = () => {
@@ -84,6 +85,8 @@ export default function Demo() {
   //   return temp + count;
   // }
 
+  const numRef = useRef<number>(0)
+
   const calculator = useMemo(() => {
     let temp = 100;
     for(let i=0;i<100;i++) {
@@ -96,9 +99,19 @@ export default function Demo() {
     return `${process.env.REACT_APP_API_URL}/public/getImage?atchFleSeqNm=${fleSeq}`;
   }
 
-  const callBack = () => {
+  // const callBack = () => {
+  //   console.log("12345678");
+  // }
+
+  const callBack = useCallback(() => {
     console.log("12345678");
-  }
+  }, [count])
+
+  useEffect(() => {
+    console.log("123");
+  })
+
+  const inputRef = useRef<any>();
 
   return (
     // <div className='text-center'>{name}</div>
@@ -151,13 +164,32 @@ export default function Demo() {
       <h1>{count}</h1>
 
       <h2>{calculator}</h2>
+      <div>
+        {
+          objName.name + ", " + objName.age
+        }
+      </div>
+
+      <div>{numRef.current}</div>
+      <button onClick={() => {
+        numRef.current = numRef.current + 1;
+      }}>Test ref</button>
 
       <button onClick={btnClickCounter}>Click counter</button>
       <button onClick={btnUpdUserInfo}>Update userInfo</button>
-      {/* <Child objName={objName} callBack={callBack} lst={lst}>
-        <Child2 />
-        <h1>Hello, Nguyen Van A</h1>
-      </Child> */}
+
+      <div>
+        <input type='text' ref={inputRef} placeholder='test use ref' />
+        <button onClick={() => {
+        console.log(inputRef.current);
+        
+          inputRef.current.focus();
+        }}>forcus ref</button>
+      </div>
+      <Child callBack={callBack}>
+        {/* <Child2 />
+        <h1>Hello, Nguyen Van A</h1> */}
+      </Child>
     </div>
   )
 }

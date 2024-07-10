@@ -6,17 +6,19 @@ export default function Child(props: any) {
 
     const { objName, callBack, lst } = props;
 
-    console.log(lst);
+    // console.log(lst);
     
 
 
     return (
         <>
-            <div>{objName.name}, {objName.age}</div>
-            <button onClick={callBack}>call back</button>
+            {/* <div>{objName.name}, {objName.age}</div> */}
+            <button onClick={callBack}>call back 123</button>
             {
                 props.children
             }
         </>
     )
 }
+
+// export default memo(Child)
