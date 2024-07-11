@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Demo from './Demo';
 import './assets/css/custom.css'
 import Part2 from './Part2';
+import Form from './Form';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +16,7 @@ root.render(
     {/* <App /> */}
     {/* <Demo /> */}
     <Part2 />
+    {/* <Form /> */}
   </React.StrictMode>
 );
 

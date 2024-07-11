@@ -9,3 +9,11 @@
 .color-green {
     color: green;
 }
+
+.invalid-feedback {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
