@@ -7,6 +7,7 @@ import Demo from './Demo';
 import './assets/css/custom.css'
 import Part2 from './Part2';
 import Form from './Form';
+import Student from './Student';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,8 +16,9 @@ root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <Demo /> */}
-    <Part2 />
+    {/* <Part2 /> */}
     {/* <Form /> */}
+    <Student />
   </React.StrictMode>
 );
 

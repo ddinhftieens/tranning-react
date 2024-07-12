@@ -73,9 +73,9 @@ export default function Part2() {
     const [lst, setLst] = useState([])
 
     useEffect(() => {
-        let url = `https://jsonplaceholder.typicode.com/posts?_page=${searchDto.page}&_limit=10`
+        let url = `https://trainning-react.atwom.edu.vn/api/public/student/getLst?_keySearch=&_limit=10&_offset=0`
         axios.get(url).then((resp: any) => {
-            setLst(resp.data)
+            console.log(resp.data);
         }).catch((err: any) => {
 
         })
