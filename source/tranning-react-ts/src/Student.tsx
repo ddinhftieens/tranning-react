@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { StudentSearch } from './student-search'
 import axios from 'axios';
 import AddStudent from './AddStudent';
+import Swal from 'sweetalert2';
+import Part3 from './Part3';
+import Part4 from './Part4';
 
 export default function Student() {
 
@@ -17,7 +20,7 @@ export default function Student() {
         }).catch((err: any) => {
 
         })
-    }, [searchDto.page, searchDto.timer, searchDto.keySearch])
+    }, [searchDto.page, searchDto.timer])
 
     const handleChangeText = (event: any) => {
         setSearchDto({
@@ -27,23 +30,56 @@ export default function Student() {
     };
 
     const delStudent = (studentId: number) => {
-        let url = ``;
-        axios.delete(url).then((resp: any) => {
-            if (resp.data.success) {
-                setSearchDto({
-                    ...searchDto,
-                    timer: new Date().getTime()
+        Swal.fire({
+            title: `Xác nhận`,
+            text: `Bạn có muốn thực hiện ...`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#89B449',
+            cancelButtonColor: '#E68A8C',
+            confirmButtonText: `Yes`,
+            cancelButtonText: `No`
+        }).then((result) => {
+            if (result.value) {
+                // logic
+                let url = `https://trainning-react.atwom.edu.vn/api/public/student/save`;
+                axios.delete(url).then((resp: any) => {
+                    if (resp.data.success) {
+                        setSearchDto({
+                            ...searchDto,
+                            timer: new Date().getTime()
+                        })
+                    }
+                }).catch((err: any) => {
+
                 })
             }
-        }).catch((err: any) => {
-
         })
     }
 
     const [showForm, setShowForm] = useState<boolean>(false)
 
     const addStudent = () => {
+        studentRef.current = null;
         setShowForm(!showForm)
+    }
+
+    const hideForm = (isCRUD: boolean) => {
+        setShowForm(false)
+        if (isCRUD) {
+            setSearchDto({
+                ...searchDto,
+                page: 1,
+                timer: new Date().getTime()
+            })
+        }
+    }
+
+    const studentRef = useRef<any>();
+
+    const editStudent = (studentDto: any) => {
+        studentRef.current = studentDto;
+        setShowForm(true)
     }
 
     return (
@@ -61,7 +97,7 @@ export default function Student() {
 
             <button onClick={addStudent}>Add</button>
 
-            <div>
+            <div className='text-center'>
                 <table>
                     <thead>
                         <tr>
@@ -84,6 +120,7 @@ export default function Student() {
                                     <td>{e.createdDate}</td>
                                     <td>
                                         <button onClick={() => delStudent(e.id)}>Del</button>
+                                        <button onClick={() => editStudent(e)}>Edit</button>
                                     </td>
                                 </tr>
                             })
@@ -106,10 +143,19 @@ export default function Student() {
                     }}>Next</button>
                 </div>
             </div>
+
+            <div>
+                <hr />
+            </div>
             <div>
                 {
-                    showForm && <AddStudent />
+                    showForm && <AddStudent hideForm={hideForm} studentDto={studentRef.current} />
                 }
+            </div>
+
+            <div className='text-center'>
+                <Part3 />
+                <Part4 />
             </div>
         </div>
     )

@@ -8,6 +8,8 @@ import './assets/css/custom.css'
 import Part2 from './Part2';
 import Form from './Form';
 import Student from './Student';
+import { Provider } from 'react-redux';
+import store from './app/store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,7 +20,9 @@ root.render(
     {/* <Demo /> */}
     {/* <Part2 /> */}
     {/* <Form /> */}
-    <Student />
+    <Provider store={store}>
+      <Student />
+    </Provider>
   </React.StrictMode>
 );
 
