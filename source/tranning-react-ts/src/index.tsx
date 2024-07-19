@@ -10,20 +10,26 @@ import Form from './Form';
 import Student from './Student';
 import { Provider } from 'react-redux';
 import store from './app/store/store';
+import { BrowserRouter } from 'react-router-dom';
+import DemoRouter from './DemoRouter';
+import RouterHook from './RouterHook';
+import DemoRouter2 from './DemoRouter2';
+import RoutersHook from './RoutersHook';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    {/* <App /> */}
-    {/* <Demo /> */}
-    {/* <Part2 /> */}
-    {/* <Form /> */}
+  // <React.StrictMode>
+  <BrowserRouter>
     <Provider store={store}>
-      <Student />
+      {/* <DemoRouter /> */}
+      {/* <RouterHook /> */}
+      {/* <DemoRouter2 /> */}
+      <RoutersHook />
     </Provider>
-  </React.StrictMode>
+  </BrowserRouter>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
