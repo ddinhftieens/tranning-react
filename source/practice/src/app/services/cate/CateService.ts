@@ -16,7 +16,7 @@ export class CateService {
     public getLstCate(modelSearch: any) {
         const params: RequestParam[] = ParamUtil.toRequestParams(modelSearch);
         const url = ApiUrlUtil.buildQueryString(process.env.REACT_APP_API_URL + '/cate/getLst', params);
-        return axios.post(url, {
+        return axios.get(url, {
             headers: HeadersUtil.getHeaders(),
         });
     }
