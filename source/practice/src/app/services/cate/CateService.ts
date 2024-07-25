@@ -13,9 +13,12 @@ export class CateService {
         return CateService._cateService;
     }
 
-    public getLstCate(modelSearch: any) {
+    public getLstCate(modelSearch: any, id: number) {
         const params: RequestParam[] = ParamUtil.toRequestParams(modelSearch);
-        const url = ApiUrlUtil.buildQueryString(process.env.REACT_APP_API_URL + '/cate/getLst', params);
+        const url = ApiUrlUtil.buildQueryString(process.env.REACT_APP_API_URL + `/cate/${id}/getLst`, params);
+        
+        "http://localhost:8397/api/cate/getLst?limit=10&page=1&keySearch=a"
+        
         return axios.get(url, {
             headers: HeadersUtil.getHeaders(),
         });
